@@ -22,7 +22,6 @@ const Controls = ({ handleKeydown, keydown }) => {
           keys: true
         }}
         args={[camera, gl.domElement]}
-        enableDamping
       />
     </group>
   );
