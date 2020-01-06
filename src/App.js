@@ -8,7 +8,8 @@ import Fallback from "./components/Fallback";
 import Controls from "./components/Controls";
 import Environment from "./components/Environment";
 import "./App.css";
-import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
+import InfoView from "./components/InfoView";
 
 //testComment
 
@@ -33,6 +34,7 @@ function App() {
             <Lights />
           </Suspense>
         </Canvas>
+        <InfoView />
       </div>
     </div>
   );
