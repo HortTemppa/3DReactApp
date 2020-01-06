@@ -1,14 +1,17 @@
-import React from "react";
-import { useLoader } from "react-three-fiber";
+import React, { useRef } from "react";
+import { useLoader, useRender } from "react-three-fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import engine from "./2CylinderEngine.gltf";
 
-const Engine = ({}) => {
+const Engine = ({ viewport }) => {
   const model = useLoader(GLTFLoader, "./gltf/2CylinderEngine.gltf");
 
   console.log(model.scene);
 
-  return <primitive object={model.scene} position={[0, 0, 0]}></primitive>;
+  const ref = useRef();
+
+  return (
+    <primitive ref={ref} object={model.scene} position={[0, 0, 0]}></primitive>
+  );
 };
 
 export default Engine;

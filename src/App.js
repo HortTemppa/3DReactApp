@@ -1,21 +1,30 @@
 import React, { useState, Suspense } from "react";
 import logo from "./logo.svg";
-import { Canvas } from "react-three-fiber";
+import { Canvas, useThree } from "react-three-fiber";
+import * as THREE from "three";
 import Engine from "./components/Engine";
 import Lights from "./components/Lights";
 import Fallback from "./components/Fallback";
+import Controls from "./components/Controls";
 import Environment from "./components/Environment";
 import "./App.css";
-import axios from "axios"; 
+import axios from "axios";
 
 function App() {
+  const viewport = { useThree };
+
   return (
     <div className="App">
-      <Canvas>
+      <Canvas
+        camera={{
+          position: [0, 0, 500],
+          far: 10000
+        }}
+      >
         <Suspense fallback={<Fallback />}>
-          <Lights />
-          <Environment />
-          <Engine />
+          <Controls />
+          <Lights viewport={viewport} />
+          <Engine viewport={viewport} />
         </Suspense>
       </Canvas>
     </div>

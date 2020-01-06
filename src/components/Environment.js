@@ -4,7 +4,7 @@ import { BackSide } from "three";
 const Environment = () => {
   return (
     <mesh>
-      <sphereBufferGeometry args={[5, 10, 10]} attach="geometry" />
+      <sphereBufferGeometry args={[500, 2000, 2000]} attach="geometry" />
       <meshStandardMaterial
         color={0xd2452b}
         attach="material"
