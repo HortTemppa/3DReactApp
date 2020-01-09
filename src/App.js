@@ -10,11 +10,43 @@ import Environment from "./components/Environment";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import InfoView from "./components/InfoView";
+import Grid from "./components/Grid";
+import Ball from "./components/Ball";
+import ButtonControls from "./components/ButtonControls.js";
+import DControls from "./components/DragControls";
 
 //testComment
 
 function App() {
   const viewport = { useThree };
+  const [size, setSize] = useState(1);
+  const [shiftDown, setShiftDown] = useState(false);
+
+  const handleBiggerClick = () => {
+    setSize(size + 1);
+  };
+
+  const handleSmallerClick = () => {
+    if (size > 1) {
+      setSize(size - 1);
+    } else return null;
+  };
+
+  const handlePointerDown = () => {
+    console.log("clicked");
+  };
+
+  const handleKeyDown = e => {
+    if (e.keyCode === 16) {
+      setShiftDown(true);
+    }
+  };
+
+  const handleKeyUp = e => {
+    if (e.keyCode === 16) {
+      setShiftDown(false);
+    }
+  };
 
   return (
     <div className="App">
@@ -22,19 +54,28 @@ function App() {
         <Canvas
           className="Canvas"
           camera={{
-            position: new THREE.Vector3(-1000, 1000, 1000),
+            position: new THREE.Vector3(-20, 20, 20),
             gl2: true,
             far: 10000,
             near: 0.5
           }}
         >
-          <Controls />
           <Suspense fallback={<Fallback />}>
-            <Model viewport={viewport} />
             <Lights />
+            <Grid />
+            <Ball size={size} handlePointerDown={handlePointerDown} />
+            <DControls shiftDown={shiftDown} />
+            <Controls
+              shiftDown={shiftDown}
+              handleKeyDown={handleKeyDown}
+              handleKeyUp={handleKeyUp}
+            />
           </Suspense>
         </Canvas>
-        <InfoView />
+        <ButtonControls
+          handleBiggerClick={handleBiggerClick}
+          handleSmallerClick={handleSmallerClick}
+        />
       </div>
     </div>
   );
